@@ -369,9 +369,11 @@ ordner_stammdaten <- "04_ordner_stammdaten"
 
 
 #### Stammdaten Laden ####
+# Alle Städte
 url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout.csv"))
-# Nur Stuttgart
-url_staedte_immo <- url_staedte_immo %>% filter(stadtname == "Stuttgart")
+
+#Links_ImmoScout_Stuttgart
+#url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout_Stuttgart.csv"))
 
 # Liste mit Urls der Ergebnisseiten erstellen
 vec_urls <- NA
@@ -464,8 +466,11 @@ url_staedte_immo <- url_staedte_immo %>%
 
 url_staedte_immo <- url_staedte_immo %>% distinct()
 
-# die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
+# Alle Städte - die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
 write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout.csv"), row.names = F)
+
+# Stuttgart
+#write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout_Stuttgart.csv"), row.names = F)
 
 # alte Files löschen
 delfiles <- dir(path=ordner_max_page ,pattern="output*")
@@ -516,7 +521,12 @@ ordner_stammdaten <- "04_ordner_stammdaten"
 
 
 #### Stammdaten Laden ####
+
+# Alle Städte
 url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout_Haus.csv"))
+
+# Stuttgart
+#url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout_Haus_Stuttgart.csv"))
 
 # Nur Stuttgart
 url_staedte_immo <- url_staedte_immo %>% filter(stadtname == "Stuttgart")
@@ -612,8 +622,11 @@ url_staedte_immo <- url_staedte_immo %>%
 
 url_staedte_immo <- url_staedte_immo %>% distinct()
 
-# die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
+# Alle Städte - die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
 write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout_Haus.csv"), row.names = F)
+
+# Stuttgart 
+#write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout_Haus_Stuttgart.csv"), row.names = F)
 
 # alte Files löschen
 delfiles <- dir(path=ordner_max_page ,pattern="output*")
@@ -663,10 +676,12 @@ ordner_stammdaten <- "04_ordner_stammdaten_miete"
 
 
 #### Stammdaten Laden ####
+
+# Alle Städte
 url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout.csv"))
 
 # Nur Stuttgart
-url_staedte_immo <- url_staedte_immo %>% filter(stadtname == "Stuttgart")
+#url_staedte_immo <- read.csv2(paste0(ordner_stammdaten,"/Links_ImmoScout_Stuttgart.csv"))
 
 # Liste mit Urls der Ergebnisseiten erstellen
 vec_urls <- NA
@@ -763,8 +778,11 @@ url_staedte_immo <- url_staedte_immo %>%
 
 url_staedte_immo <- url_staedte_immo %>% distinct()
 
-# die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
+# Alle - Städte die maximale Anzahl an Ergebnisseiten wurde aktualisiert und wird gespeichert
 write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout.csv"), row.names = F)
+
+# Stuttgart
+#write.csv2(url_staedte_immo,paste0(ordner_stammdaten,"/Links_ImmoScout_Stuttgart.csv"), row.names = F)
 
 # alte Files löschen
 delfiles <- dir(path=ordner_max_page ,pattern="output*")
@@ -1197,7 +1215,7 @@ df_result <- foreach(i_cl = seq_along(immo_links),
                        tryCatch({
                          withTimeout({
                            # Seite aufrufen
-                           page <- fn_get_page_content(immo_links[i_cl], 15)
+                           page <- fn_get_page_content(immo_links[i_cl], 50)
                            if(!is.null(page)){
                              # HTML-Inserat nach Informationen durchsuchen
                              df <- fn_scrape_immo_inserat(immo_links[i_cl], page) 
@@ -1258,3 +1276,4 @@ write.csv(inserate_df_nur_IDs, "IDs_Datenbank.csv", row.names = F)
 # alte Files löschen
 delfiles <- dir(path=ordner_inserate ,pattern="output*")
 file.remove(file.path(ordner_inserate, delfiles))
+
